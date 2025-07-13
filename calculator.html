@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ransomware Cost Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    .input-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #444;
+    }
+    #result {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ransomware Cost Calculator</h1>
+
+  <div class="input-group">
+    <label for="downtimeHours">Downtime Hours</label>
+    <input type="number" id="downtimeHours" />
+  </div>
+
+  <div class="input-group">
+    <label for="hourlyLoss">Hourly Revenue Loss ($)</label>
+    <input type="number" id="hourlyLoss" />
+  </div>
+
+  <div class="input-group">
+    <label for="itRemediation">IT Remediation Cost ($)</label>
+    <input type="number" id="itRemediation" />
+  </div>
+
+  <div class="input-group">
+    <label for="laborHours">IR Team Total Hours</label>
+    <input type="number" id="laborHours" />
+  </div>
+
+  <div class="input-group">
+    <label for="laborRate">IR Team Hourly Rate ($)</label>
+    <input type="number" id="laborRate" />
+  </div>
+
+  <div class="input-group">
+    <label for="lostRevenue">Lost Revenue from Business Interruption ($)</label>
+    <input type="number" id="lostRevenue" />
+  </div>
+
+  <div class="input-group">
+    <label for="ransomPayment">Ransom Payment ($)</label>
+    <input type="number" id="ransomPayment" />
+  </div>
+
+  <div class="input-group">
+    <label for="legalCosts">Legal & Compliance Costs ($)</label>
+    <input type="number" id="legalCosts" />
+  </div>
+
+  <div class="input-group">
+    <label for="reputationDamage">Reputation Damage / Customer Churn ($)</label>
+    <input type="number" id="reputationDamage" />
+  </div>
+
+  <div class="input-group">
+    <label for="insurance">Insurance Deductibles ($)</label>
+    <input type="number" id="insurance" />
+  </div>
+
+  <button onclick="calculateTotal()">Calculate Total Cost</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateTotal() {
+      const downtime = parseFloat(document.getElementById('downtimeHours').value || 0);
+      const hourlyLoss = parseFloat(document.getElementById('hourlyLoss').value || 0);
+      const itRemediation = parseFloat(document.getElementById('itRemediation').value || 0);
+      const laborHours = parseFloat(document.getElementById('laborHours').value || 0);
+      const laborRate = parseFloat(document.getElementById('laborRate').value || 0);
+      const lostRevenue = parseFloat(document.getElementById('lostRevenue').value || 0);
+      const ransomPayment = parseFloat(document.getElementById('ransomPayment').value || 0);
+      const legalCosts = parseFloat(document.getElementById('legalCosts').value || 0);
+      const reputationDamage = parseFloat(document.getElementById('reputationDamage').value || 0);
+      const insurance = parseFloat(document.getElementById('insurance').value || 0);
+
+      const downtimeCost = downtime * hourlyLoss;
+      const laborCost = laborHours * laborRate;
+
+      const total =
+        downtimeCost +
+        itRemediation +
+        laborCost +
+        lostRevenue +
+        ransomPayment +
+        legalCosts +
+        reputationDamage +
+        insurance;
+
+      document.getElementById('result').innerText =
+        `Estimated Total Ransomware Cost: $${total.toLocaleString()}`;
+    }
+  </script>
+
+</body>
+</html>
